@@ -1,5 +1,5 @@
 {
-  "name": "web3auth-signer",
+  "name": "signers",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,14 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@privy-io/react-auth": "^1.78.2",
+    "@safe-global/protocol-kit": "^4.0.4",
+    "@web3auth/base": "^8.12.2",
+    "@web3auth/ethereum-provider": "^8.12.3",
+    "@web3auth/modal": "^8.12.3",
+    "magic-sdk": "^28.4.0",
+    "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.5"
+    "viem": "^2.19.4"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
-    "@types/react-dom": "^18"
+    "@types/react-dom": "^18",
+    "typescript": "^5"
   }
 }
