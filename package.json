@@ -1,5 +1,5 @@
 {
-  "name": "signers",
+  "name": "safe-signers",
   "version": "0.1.0",
   "private": true,
   "scripts": {
