@@ -6,7 +6,7 @@ import { WalletClient, createWalletClient, custom } from 'viem'
 import { sepolia } from 'viem/chains'
 
 // Get the APP_ID from the Privy dashboard.
-const APP_ID = process.env.PRIVY_APP_ID
+const APP_ID = process.env.NEXT_PUBLIC_PRIVY_APP_ID
 
 function PrivyApp() {
   const { login, logout, ready, authenticated } = usePrivy()

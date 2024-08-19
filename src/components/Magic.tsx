@@ -6,7 +6,7 @@ import { WalletClient, createWalletClient, custom } from 'viem'
 import { sepolia } from 'viem/chains'
 
 // Get the API_KEY from the Magic dashboard.
-const API_KEY = process.env.MAGIC_API_KEY
+const API_KEY = process.env.NEXT_PUBLIC_MAGIC_API_KEY
 
 export default function MagicComponent() {
   const [magic, setMagic] = useState<Magic>()

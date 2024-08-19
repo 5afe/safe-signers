@@ -8,7 +8,7 @@ import { WalletClient, createWalletClient, custom } from 'viem'
 import { sepolia } from 'viem/chains'
 
 // Get the CLIENT_ID from the Web3Auth dashboard.
-const CLIENT_ID = process.env.WEB3AUTH_CLIENT_ID
+const CLIENT_ID = process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
