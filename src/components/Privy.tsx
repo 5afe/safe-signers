@@ -6,7 +6,7 @@ import { WalletClient, createWalletClient, custom } from 'viem'
 import { sepolia } from 'viem/chains'
 
 // Get the APP_ID from the Privy dashboard.
-const APP_ID = ''
+const APP_ID = process.env.PRIVY_APP_ID
 
 function PrivyApp() {
   const { login, logout, ready, authenticated } = usePrivy()
@@ -16,6 +16,8 @@ function PrivyApp() {
 
   useEffect(() => {
     const init = async () => {
+      if (!APP_ID) return
+      
       if (ready && authenticated && readyWallets && wallets.length > 0 ) {
         const ethereumProvider = await wallets[0].getEthereumProvider()
         const client = createWalletClient({
@@ -72,6 +74,18 @@ function PrivyApp() {
 }
 
 export default function PrivyComponent() {
+  if (!APP_ID) {
+    return (
+      <div className="card">
+        <div className="title">
+          <Image src={privyLogo} alt="Magic" height="30" />
+          <h2>Privy</h2>
+        </div>
+        <pre>Not configured</pre>
+      </div>
+    )
+  }
+  
   return (
     <PrivyProvider
       appId={APP_ID}

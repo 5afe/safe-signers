@@ -8,7 +8,7 @@ import { WalletClient, createWalletClient, custom } from 'viem'
 import { sepolia } from 'viem/chains'
 
 // Get the CLIENT_ID from the Web3Auth dashboard.
-const CLIENT_ID = ''
+const CLIENT_ID = process.env.WEB3AUTH_CLIENT_ID
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -25,7 +25,7 @@ const privateKeyProvider = new EthereumPrivateKeyProvider({
   config: { chainConfig }
 })
 
-const web3auth = new Web3Auth({
+const web3auth = CLIENT_ID && new Web3Auth({
   clientId: CLIENT_ID,
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
   privateKeyProvider
@@ -38,6 +38,8 @@ export default function Web3AuthComponent() {
   useEffect(() => {
     const init = async () => {
       try {
+        if (!CLIENT_ID) return
+        
         await web3auth.initModal()
         const client = createWalletClient({
           chain: sepolia,
@@ -99,8 +101,14 @@ export default function Web3AuthComponent() {
         <Image src={web3AuthLogo} alt="Web3Auth" height="30" />
         <h2>Web3Auth</h2>
       </div>
-      <pre>{signerAddress || 'Not connected'}</pre>
-      {signerAddress ? loggedInView : unloggedInView}
+      {!CLIENT_ID ? (
+        <pre>Not configured</pre>
+      ) : (
+        <>
+          <pre>{signerAddress || 'Not connected'}</pre>
+          {signerAddress ? loggedInView : unloggedInView}
+        </>
+      )}
     </div>
   )
 }

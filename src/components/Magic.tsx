@@ -6,7 +6,7 @@ import { WalletClient, createWalletClient, custom } from 'viem'
 import { sepolia } from 'viem/chains'
 
 // Get the API_KEY from the Magic dashboard.
-const API_KEY = ''
+const API_KEY = process.env.MAGIC_API_KEY
 
 export default function MagicComponent() {
   const [magic, setMagic] = useState<Magic>()
@@ -14,6 +14,8 @@ export default function MagicComponent() {
   const [signerAddress, setSignerAddress] = useState<string | null>(null)
 
   useEffect(() => {
+    if (!API_KEY) return
+    
     const magicInstance = new Magic(API_KEY, {
       network: {
         rpcUrl: 'https://ethereum-sepolia-rpc.publicnode.com',
@@ -69,8 +71,14 @@ export default function MagicComponent() {
         <Image src={magicLogo} alt="Magic" height="30" />
         <h2>Magic</h2>
       </div>
-      <pre>{signerAddress || 'Not connected'}</pre>
-      {signerAddress ? loggedInView : unloggedInView}
+      {!API_KEY ? (
+        <pre>Not configured</pre>
+      ) : (
+        <>
+          <pre>{signerAddress || 'Not connected'}</pre>
+          {signerAddress ? loggedInView : unloggedInView}
+        </>
+      )}
     </div>
   )
 }
