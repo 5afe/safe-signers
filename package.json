@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@dynamic-labs/ethereum": "^3.0.3",
+    "@dynamic-labs/sdk-react-core": "^3.0.3",
     "@privy-io/react-auth": "^1.78.2",
     "@safe-global/protocol-kit": "^4.0.4",
     "@web3auth/base": "^8.12.2",
