@@ -11,7 +11,7 @@ const API_KEY = process.env.NEXT_PUBLIC_MAGIC_API_KEY
 export default function MagicComponent() {
   const [magic, setMagic] = useState<Magic>()
   const [provider, setProvider] = useState<WalletClient | null>(null)
-  const [signerAddress, setSignerAddress] = useState<string | null>(null)
+  const [signer, setSigner] = useState<string | null>(null)
 
   useEffect(() => {
     if (!API_KEY) return
@@ -31,14 +31,14 @@ export default function MagicComponent() {
   
       await magic.wallet.connectWithUI()
       const metadata = await magic.user.getInfo()
-      const signerAddress = metadata.publicAddress
+      const signer = metadata.publicAddress
       const client = createWalletClient({
         chain: sepolia,
         transport: custom(magic.rpcProvider)
       })
       
       setProvider(client)
-      setSignerAddress(signerAddress)
+      setSigner(signer)
     } catch (error) {
       console.error(error)
     }
@@ -48,7 +48,7 @@ export default function MagicComponent() {
     await magic?.user.logout()
 
     setProvider(null)
-    setSignerAddress(null)
+    setSigner(null)
   }
 
   const unloggedInView = (
@@ -75,8 +75,8 @@ export default function MagicComponent() {
         <pre>Not configured</pre>
       ) : (
         <>
-          <pre>{signerAddress || 'Not connected'}</pre>
-          {signerAddress ? loggedInView : unloggedInView}
+          <pre>{signer || 'Not connected'}</pre>
+          {signer ? loggedInView : unloggedInView}
         </>
       )}
     </div>

@@ -12,7 +12,7 @@ function PrivyApp() {
   const { login, logout, ready, authenticated } = usePrivy()
   const { ready: readyWallets, wallets } = useWallets()
   const [provider, setProvider] = useState<WalletClient | null>(null)
-  const [signerAddress, setSignerAddress] = useState<string | null>(null)
+  const [signer, setSigner] = useState<string | null>(null)
 
   useEffect(() => {
     const init = async () => {
@@ -26,7 +26,7 @@ function PrivyApp() {
         })
   
         setProvider(client)
-        setSignerAddress(wallets[0].address)
+        setSigner(wallets[0].address)
       }
     }
     init()
@@ -44,7 +44,7 @@ function PrivyApp() {
     logout()
 
     setProvider(null)
-    setSignerAddress(null)
+    setSigner(null)
   }
 
   const unloggedInView = (
@@ -67,8 +67,8 @@ function PrivyApp() {
         <Image src={privyLogo} alt="Magic" height="30" />
         <h2>Privy</h2>
       </div>
-      <pre>{signerAddress || 'Not connected'}</pre>
-      {signerAddress ? loggedInView : unloggedInView}
+      <pre>{signer || 'Not connected'}</pre>
+      {signer ? loggedInView : unloggedInView}
     </div>
   )
 }

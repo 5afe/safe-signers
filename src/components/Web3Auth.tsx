@@ -33,7 +33,7 @@ const web3auth = CLIENT_ID && new Web3Auth({
 
 export default function Web3AuthComponent() {
   const [provider, setProvider] = useState<WalletClient | null>(null)
-  const [signerAddress, setSignerAddress] = useState<string | null>(null)
+  const [signer, setSigner] = useState<string | null>(null)
 
   useEffect(() => {
     const init = async () => {
@@ -48,7 +48,7 @@ export default function Web3AuthComponent() {
 
         if (web3auth.connected) {
           setProvider(client)
-          setSignerAddress((await client.getAddresses())[0])
+          setSigner((await client.getAddresses())[0])
         }
       } catch (error) {
         console.error(error)
@@ -67,7 +67,7 @@ export default function Web3AuthComponent() {
 
       if (web3auth.connected) {
         setProvider(client)
-        setSignerAddress((await client.getAddresses())[0])
+        setSigner((await client.getAddresses())[0])
       }
     } catch (error) {
       console.error(error)
@@ -78,7 +78,7 @@ export default function Web3AuthComponent() {
     await web3auth.logout()
 
     setProvider(null)
-    setSignerAddress(null)
+    setSigner(null)
   }
 
   const unloggedInView = (
@@ -105,8 +105,8 @@ export default function Web3AuthComponent() {
         <pre>Not configured</pre>
       ) : (
         <>
-          <pre>{signerAddress || 'Not connected'}</pre>
-          {signerAddress ? loggedInView : unloggedInView}
+          <pre>{signer || 'Not connected'}</pre>
+          {signer ? loggedInView : unloggedInView}
         </>
       )}
     </div>
