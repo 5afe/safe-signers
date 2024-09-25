@@ -38,7 +38,7 @@ export default function Web3AuthComponent() {
   useEffect(() => {
     const init = async () => {
       try {
-        if (!CLIENT_ID) return
+        if (!CLIENT_ID || !web3auth) return
         
         await web3auth.initModal()
         const client = createWalletClient({
@@ -59,6 +59,8 @@ export default function Web3AuthComponent() {
   
   const login = async () => {
     try {
+      if (!web3auth) return
+
       const web3authProvider = await web3auth.connect()
       const client = createWalletClient({
         chain: sepolia,
@@ -75,6 +77,8 @@ export default function Web3AuthComponent() {
   }
 
   const logout = async () => {
+    if (!web3auth) return
+    
     await web3auth.logout()
 
     setProvider(null)
