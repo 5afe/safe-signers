@@ -25,11 +25,13 @@ const privateKeyProvider = new EthereumPrivateKeyProvider({
   config: { chainConfig }
 })
 
-const web3auth = CLIENT_ID && new Web3Auth({
-  clientId: CLIENT_ID,
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
-  privateKeyProvider
-})
+const web3auth =
+  CLIENT_ID &&
+  new Web3Auth({
+    clientId: CLIENT_ID,
+    web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
+    privateKeyProvider
+  })
 
 export default function Web3AuthComponent() {
   const [provider, setProvider] = useState<WalletClient | null>(null)
@@ -39,7 +41,7 @@ export default function Web3AuthComponent() {
     const init = async () => {
       try {
         if (!CLIENT_ID || !web3auth) return
-        
+
         await web3auth.initModal()
         const client = createWalletClient({
           chain: sepolia,
@@ -56,7 +58,7 @@ export default function Web3AuthComponent() {
     }
     init()
   }, [])
-  
+
   const login = async () => {
     try {
       if (!web3auth) return
@@ -78,26 +80,16 @@ export default function Web3AuthComponent() {
 
   const logout = async () => {
     if (!web3auth) return
-    
+
     await web3auth.logout()
 
     setProvider(null)
     setSigner(null)
   }
 
-  const unloggedInView = (
-    <button onClick={login}>
-      Connect
-    </button>
-  )
+  const unloggedInView = <button onClick={login}>Connect</button>
 
-  const loggedInView = (
-    <>
-      <button onClick={logout}>
-        Disconnect
-      </button>
-    </>
-  )
+  const loggedInView = <button onClick={logout}>Disconnect</button>
 
   return (
     <div className="card">

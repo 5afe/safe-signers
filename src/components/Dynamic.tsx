@@ -1,6 +1,13 @@
 import dynamicLogo from '@/assets/dynamic_logo.png'
-import { DynamicContextProvider, useDynamicContext, useIsLoggedIn } from '@dynamic-labs/sdk-react-core'
-import { EthereumWalletConnectors, isEthereumWallet } from '@dynamic-labs/ethereum'
+import {
+  EthereumWalletConnectors,
+  isEthereumWallet
+} from '@dynamic-labs/ethereum'
+import {
+  DynamicContextProvider,
+  useDynamicContext,
+  useIsLoggedIn
+} from '@dynamic-labs/sdk-react-core'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { WalletClient } from 'viem'
@@ -17,9 +24,8 @@ function DynamicApp() {
   useEffect(() => {
     const init = async () => {
       if (isLoggedIn && primaryWallet && isEthereumWallet(primaryWallet)) {
-
         const client = await primaryWallet.getWalletClient()
-  
+
         setProvider(client)
         setSignerAddress(primaryWallet.address)
       }
@@ -37,13 +43,7 @@ function DynamicApp() {
     <button onClick={() => setShowAuthFlow(true)}>Connect</button>
   )
 
-  const loggedInView = (
-    <>
-      <button onClick={disconnect}>
-        Disconnect
-      </button>
-    </>
-  )
+  const loggedInView = <button onClick={disconnect}>Disconnect</button>
 
   return (
     <div className="card">
@@ -69,7 +69,7 @@ export default function DynamicComponent() {
       </div>
     )
   }
-  
+
   return (
     <DynamicContextProvider
       settings={{

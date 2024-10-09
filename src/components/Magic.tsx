@@ -15,20 +15,20 @@ export default function MagicComponent() {
 
   useEffect(() => {
     if (!API_KEY) return
-    
+
     const magicInstance = new Magic(API_KEY, {
       network: {
         rpcUrl: 'https://ethereum-sepolia-rpc.publicnode.com',
-        chainId: 11155111,
-      },
+        chainId: 11155111
+      }
     })
     setMagic(magicInstance)
   }, [])
-  
+
   const login = async () => {
     try {
       if (!magic) return
-  
+
       await magic.wallet.connectWithUI()
       const metadata = await magic.user.getInfo()
       const signer = metadata.publicAddress
@@ -36,7 +36,7 @@ export default function MagicComponent() {
         chain: sepolia,
         transport: custom(magic.rpcProvider)
       })
-      
+
       setProvider(client)
       setSigner(signer)
     } catch (error) {
@@ -51,19 +51,9 @@ export default function MagicComponent() {
     setSigner(null)
   }
 
-  const unloggedInView = (
-    <button onClick={login}>
-      Connect
-    </button>
-  )
+  const unloggedInView = <button onClick={login}>Connect</button>
 
-  const loggedInView = (
-    <>
-      <button onClick={logout}>
-        Disconnect
-      </button>
-    </>
-  )
+  const loggedInView = <button onClick={logout}>Disconnect</button>
 
   return (
     <div className="card">

@@ -17,21 +17,21 @@ function PrivyApp() {
   useEffect(() => {
     const init = async () => {
       if (!APP_ID) return
-      
-      if (ready && authenticated && readyWallets && wallets.length > 0 ) {
+
+      if (ready && authenticated && readyWallets && wallets.length > 0) {
         const ethereumProvider = await wallets[0].getEthereumProvider()
         const client = createWalletClient({
           chain: sepolia,
           transport: custom(ethereumProvider)
         })
-  
+
         setProvider(client)
         setSigner(wallets[0].address)
       }
     }
     init()
   }, [ready, authenticated, readyWallets, wallets])
-  
+
   const connect = async () => {
     try {
       login()
@@ -47,19 +47,9 @@ function PrivyApp() {
     setSigner(null)
   }
 
-  const unloggedInView = (
-    <button onClick={connect}>
-      Connect
-    </button>
-  )
+  const unloggedInView = <button onClick={connect}>Connect</button>
 
-  const loggedInView = (
-    <>
-      <button onClick={disconnect}>
-        Disconnect
-      </button>
-    </>
-  )
+  const loggedInView = <button onClick={disconnect}>Disconnect</button>
 
   return (
     <div className="card">
@@ -85,12 +75,12 @@ export default function PrivyComponent() {
       </div>
     )
   }
-  
+
   return (
     <PrivyProvider
       appId={APP_ID}
       config={{
-        embeddedWallets: { 
+        embeddedWallets: {
           createOnLogin: 'users-without-wallets' // defaults to 'off'
         }
       }}
