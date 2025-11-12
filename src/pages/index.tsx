@@ -1,5 +1,6 @@
 import Dynamic from '@/components/Dynamic'
 import Magic from '@/components/Magic'
+import Openfort from '@/components/Openfort'
 import Privy from '@/components/Privy'
 import Web3Auth from '@/components/Web3Auth'
 import Head from 'next/head'
@@ -16,6 +17,7 @@ export default function Home() {
         <h1>Signers</h1>
         <Dynamic />
         <Magic />
+        <Openfort />
         <Privy />
         <Web3Auth />
       </main>
