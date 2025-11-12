@@ -8,6 +8,7 @@ This example application shows how to create signers from different service prov
 | -------- | ------- |
 | [Dynamic](https://dynamic.xyz)   | [Integrate Dynamic signer](https://docs.safe.global/sdk/signers/dynamic) |
 | [Magic](https://magic.link)     | [Integrate Magic signer](https://docs.safe.global/sdk/signers/magic) |
+| [Openfort](https://openfort.io) | [Integrate Openfort signer](https://www.openfort.io/docs/products/embedded-wallet/react) |
 | [Privy](https://privy.io)       | [Integrate Privy signer](https://docs.safe.global/sdk/signers/privy) |
 | [Web3Auth](https://web3auth.io) | [Integrate Web3Auth signer](https://docs.safe.global/sdk/signers/web3auth) |
 
@@ -34,6 +35,8 @@ This will get a copy of the project installed locally. Now, create an `.env` fil
 ```
 NEXT_PUBLIC_DYNAMIC_ENVIRONMENT_ID=
 NEXT_PUBLIC_MAGIC_API_KEY=
+NEXT_PUBLIC_OPENFORT_PUBLISHABLE_KEY=
+NEXT_PUBLIC_SHIELD_PUBLISHABLE_KEY=
 NEXT_PUBLIC_PRIVY_APP_ID=
 NEXT_PUBLIC_WEB3AUTH_CLIENT_ID=
 ```
